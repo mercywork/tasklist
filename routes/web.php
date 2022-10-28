@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//use Illuminate\Routing\Route;
+
+Route::get('/', 'TasksController@index');
+
+Route::resource('tasks', 'TasksController');
