@@ -10,6 +10,7 @@
             <tr>
                 <th>id</th>
                 <th>タスク</th>
+                <th>いつまでに</th>
             </tr>
         </thead>
         <tbody>
@@ -17,11 +18,14 @@
             <tr>
                 <td>{{ $task->id }}</td>
                 <td>{{ $task->content }}</td>
+                <td>{{ $task->limit}}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 @endif
 
+{{-- メッセージ作成ページへのリンク --}}
+{!! link_to_route('tasks.create', '新規タスク入力', [], ['class' => 'btn btn-primary']) !!}
 
 @endsection
