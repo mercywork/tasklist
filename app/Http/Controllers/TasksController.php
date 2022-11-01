@@ -40,7 +40,12 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = new Task;
+        $task->content = $request->content;
+        $task->limit = $request->limit;
+        $task->save();
+
+        return redirect('/');
     }
 
     /**
@@ -51,7 +56,9 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        return view('tasks.show', ['task' => $task,]);
     }
 
     /**
