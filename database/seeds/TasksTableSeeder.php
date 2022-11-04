@@ -11,19 +11,11 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tasks')->insert([
-            'content' => 'test タスク1',
-            'limit' => 'test 1'
-        ]);
-
-        DB::table('tasks')->insert([
-            'content' => 'test タスク2',
-            'limit' => 'test 2'
-        ]);
-
-        DB::table('tasks')->insert([
-            'content' => 'test タスク3',
-            'limit' => 'test 3'
-        ]);
+        for ($i = 1; $i <= 30; $i++) {
+            DB::table('tasks')->insert([
+                'content' => 'test content ' . $i,
+                'limit' => 'test' . $i
+            ]);
+        }
     }
 }
