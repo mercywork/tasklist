@@ -40,6 +40,12 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+            'limit' => 'required|max:255',
+        ]);
+
         $task = new Task;
         $task->content = $request->content;
         $task->limit = $request->limit;
@@ -69,7 +75,9 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        return view('tasks.edit', ['task' => $task]);
     }
 
     /**
@@ -81,7 +89,18 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+
+        $task = Task::findOrFail($id);
+
+        $task->content = $request->content;
+        $task->limit = $request->limit;
+        $task->save();
+
+        return redirect('/');
     }
 
     /**
@@ -92,6 +111,10 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        $task->delete();
+
+        return redirect('/');
     }
 }
